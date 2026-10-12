@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+/* Warm "paper and ink" palette. Severity colours are the only loud colours on the page. */
+:root {
+  --background: #f3efe6;
+  --foreground: #1b1a17;
+  --surface: #fbf9f3;
+  --line: #ddd6c6;
+  --muted: #6c675b;
+  --sec: #b4281b;
+  --sec-bg: #f8e4de;
+  --sec-line: #e3a496;
+  --brk: #85570a;
+  --brk-bg: #f6eacb;
+  --brk-line: #dcbb6c;
+  --note: #2a5aa3;
+  --note-bg: #e6eef9;
+  --accent: #1b6a55;
+  --accent-bg: #dfeee7;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0d0e0b;
+    --foreground: #ece8dc;
+    --surface: #141510;
+    --line: #2a2c22;
+    --muted: #9b9787;
+    --sec: #ff7f6b;
+    --sec-bg: #2a1511;
+    --sec-line: #7a2f24;
+    --brk: #f2b84b;
+    --brk-bg: #271e08;
+    --brk-line: #6e5214;
+    --note: #8db5f0;
+    --note-bg: #111b2e;
+    --accent: #86e0a8;
+    --accent-bg: #112018;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-muted: var(--muted);
+  --color-sec: var(--sec);
+  --color-sec-bg: var(--sec-bg);
+  --color-sec-line: var(--sec-line);
+  --color-brk: var(--brk);
+  --color-brk-bg: var(--brk-bg);
+  --color-brk-line: var(--brk-line);
+  --color-note: var(--note);
+  --color-note-bg: var(--note-bg);
+  --color-accent: var(--accent);
+  --color-accent-bg: var(--accent-bg);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-newsreader);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--background);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Section anchors land below the sticky header. */
+[id^="r-"] {
+  scroll-margin-top: 5rem;
+}
+
+@keyframes radar-sweep {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes radar-ping {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+.radar-sweep {
+  transform-origin: 50% 50%;
+  animation: radar-sweep 9s linear infinite;
+}
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: radar-ping 2.4s ease-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .radar-sweep,
+  .pulse-dot::after {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

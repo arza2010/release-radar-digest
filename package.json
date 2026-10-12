@@ -1,0 +1,42 @@
+{
+  "name": "release-radar",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "vitest run",
+    "typecheck": "next typegen && tsc --noEmit",
+    "check-repos": "tsx --conditions=react-server --env-file=.env.local scripts/check-repos.ts",
+    "rules-digest": "tsx --conditions=react-server --env-file=.env.local scripts/rules-digest.ts",
+    "check-db": "tsx --conditions=react-server --env-file=.env.local scripts/check-db.ts",
+    "seed": "tsx --conditions=react-server --env-file=.env.local scripts/seed.ts",
+    "analyze": "tsx --conditions=react-server --env-file=.env.local scripts/analyze.ts",
+    "examples": "tsx --conditions=react-server --env-file=.env.local scripts/examples.ts",
+    "build-digest": "tsx --conditions=react-server --env-file=.env.local scripts/build-digest.ts",
+    "preview-email": "tsx --conditions=react-server --env-file=.env.local scripts/preview-email.ts"
+  },
+  "dependencies": {
+    "@google/genai": "^2.28.0",
+    "@supabase/supabase-js": "^2.117.3",
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "resend": "^6.32.1",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.0",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.15",
+    "typescript": "^5",
+    "vitest": "^5.0.3"
+  }
+}
