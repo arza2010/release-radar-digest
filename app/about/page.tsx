@@ -1,10 +1,16 @@
 import Image from "next/image";
+import Link from "next/link";
 import { RadarMark } from "@/components/radar-mark";
+import { SOURCE_URL } from "@/lib/site";
 
 export const metadata = { title: "How it works · Release Radar" };
 
-function H2({ children }: { children: React.ReactNode }) {
-  return <h2 className="mt-14 border-b border-line pb-2 font-serif text-2xl font-semibold tracking-tight">{children}</h2>;
+function H2({ id, children }: { id: string; children: React.ReactNode }) {
+  return (
+    <h2 id={id} className="mt-14 scroll-mt-20 border-b border-line pb-2 font-serif text-2xl font-semibold tracking-tight">
+      {children}
+    </h2>
+  );
 }
 
 const STEPS = [
@@ -36,7 +42,10 @@ const LIMITS = [
 export default function About() {
   return (
     <main className="mx-auto w-full max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
-      <div className="flex items-center gap-4">
+      <Link href="/" className="inline-flex items-center gap-1.5 text-sm font-medium text-muted underline-offset-2 hover:text-foreground hover:underline">
+        <span aria-hidden>←</span> Back to the live digest
+      </Link>
+      <div className="mt-5 flex items-center gap-4">
         <RadarMark bold sweep className="size-14 shrink-0 text-accent" />
         <h1 className="font-serif text-4xl font-semibold tracking-tight sm:text-5xl">How it works</h1>
       </div>
@@ -44,7 +53,21 @@ export default function About() {
         GitHub notifications bury real releases under comments, pull requests and commits. Release Radar looks only at releases, and puts security fixes and breaking changes at the top of a digest you can read in five minutes.
       </p>
 
-      <H2>The pipeline, in plain words</H2>
+      <nav aria-label="On this page" className="mt-8 flex flex-wrap gap-2 font-mono text-xs">
+        {[
+          ["pipeline", "Pipeline"],
+          ["which-repos", "Which repos"],
+          ["who-does-what", "AI / rules / human"],
+          ["components", "Components map"],
+          ["known-limits", "Known limits"],
+        ].map(([id, label]) => (
+          <a key={id} href={`#${id}`} className="rounded-full border border-line bg-surface px-3 py-1 text-muted hover:border-accent hover:text-foreground">
+            {label}
+          </a>
+        ))}
+      </nav>
+
+      <H2 id="pipeline">The pipeline, in plain words</H2>
       <ol className="mt-5 flex flex-col gap-4">
         {STEPS.map(([title, body], i) => (
           <li key={title} className="grid grid-cols-[2rem_1fr] gap-3">
@@ -57,7 +80,7 @@ export default function About() {
         ))}
       </ol>
 
-      <H2>Which repos does it watch?</H2>
+      <H2 id="which-repos">Which repos does it watch?</H2>
       <div className="mt-5 flex max-w-prose flex-col gap-4 leading-relaxed">
         <p>
           <span className="font-semibold">A fixed list, not a search.</span> The app watches exactly the repos on the Repos page and nothing else. It does not discover repos, and it does not filter by industry, topic, stars or language. The starting list of 22 was picked by hand, leaning on payments (Stripe, Razorpay, Adyen), authentication (next-auth, jose, Keycloak, Auth0) and web basics (Express, axios, Fastify), and each one was checked against live GitHub first.
@@ -76,7 +99,7 @@ export default function About() {
         </p>
       </div>
 
-      <H2>Who does what</H2>
+      <H2 id="who-does-what">Who does what</H2>
       <div className="mt-5 overflow-hidden rounded-xl border border-line bg-surface">
         <table className="w-full text-left text-sm">
           <thead className="hidden border-b border-line font-mono text-[11px] uppercase tracking-[0.14em] text-muted sm:table-header-group">
@@ -105,7 +128,7 @@ export default function About() {
         That is why a rule flag survives an AI that says “routine”: the dashboard shows both opinions (“Rule flagged; AI judged routine — check the notes”) and leaves the decision to you.
       </p>
 
-      <H2>Components map</H2>
+      <H2 id="components">Components map</H2>
       <figure className="mt-5">
         <Image
           src="/components-map.png"
@@ -118,7 +141,7 @@ export default function About() {
         <figcaption className="mt-2 text-xs text-muted">One difference from the diagram: releases are sent to Gemini in batches of up to 8 per call, not one call per release, to stay inside the free quota.</figcaption>
       </figure>
 
-      <H2>Known limits</H2>
+      <H2 id="known-limits">Known limits</H2>
       <ul className="mt-5 flex flex-col gap-4">
         {LIMITS.map(([title, body]) => (
           <li key={title} className="leading-relaxed">
@@ -127,6 +150,16 @@ export default function About() {
           </li>
         ))}
       </ul>
+
+      <div className="mt-16 flex flex-wrap items-center gap-3 rounded-2xl border border-line bg-surface p-5">
+        <p className="mr-auto font-serif text-lg font-semibold">See it working on real data.</p>
+        <Link href="/" className="rounded-full bg-foreground px-4 py-2 text-sm font-semibold text-background">
+          Open the digest →
+        </Link>
+        <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer" className="rounded-full border border-line bg-background px-4 py-2 text-sm font-semibold hover:border-accent">
+          Source code ↗
+        </a>
+      </div>
     </main>
   );
 }

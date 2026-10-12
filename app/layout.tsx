@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { Geist, Geist_Mono, Newsreader } from "next/font/google";
 import { Nav } from "@/components/nav";
 import { RadarMark } from "@/components/radar-mark";
+import { SOURCE_URL } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -34,7 +35,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <footer className="border-t border-line">
           <div className="mx-auto flex w-full max-w-5xl flex-col gap-1 px-4 py-6 text-xs text-muted sm:flex-row sm:justify-between sm:px-6">
             <span>Summaries by Gemini Flash, from release text only. Rules flag first; the AI can only add flags, never remove them.</span>
-            <span className="font-mono">GitHub releases only · no issues, PRs or commits</span>
+            <span className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono">
+              <span>GitHub releases only · no issues, PRs or commits</span>
+              <Link href="/about" className="font-semibold text-foreground underline underline-offset-2">How it works</Link>
+              <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-foreground underline underline-offset-2">Source ↗</a>
+            </span>
           </div>
         </footer>
       </body>

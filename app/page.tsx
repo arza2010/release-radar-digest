@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { DigestView } from "@/components/digest-view";
 import { EmailDigestButton } from "@/components/email-digest-button";
 import { LiveRefresh } from "@/components/live-refresh";
+import { UnderTheHood } from "@/components/under-the-hood";
 import { LookbackSelector, parseLookback } from "@/components/lookback";
 import { formatISTDateTime } from "@/lib/dates";
 import { parseQuery, parseShow } from "@/lib/digest-filter";
@@ -70,12 +71,17 @@ async function Dashboard({ searchParams }: { searchParams: PageProps<"/">["searc
         {days === 7
           ? "Live view: releases are pulled from GitHub when you open this page, new ones get an AI summary, and everything is flagged the moment it appears. "
           : `Last ${days} days, built from stored results (no live fetch for this range). Releases no refresh or run has stored yet are not shown; use Backfill on the Repos page to fill it in. `}
-        Releases not yet analysed show rules-only flags.
+        Releases not yet analysed show rules-only flags.{" "}
+        <Link href="/about" className="whitespace-nowrap font-semibold underline underline-offset-2 hover:text-foreground">
+          How it works →
+        </Link>
       </p>
 
       <div className="mt-5">
         <DigestView digest={digest} view={{ base: "/", days, show, q }} reviewEnabled={reviewEnabled} reviewedIds={reviewedIds} />
       </div>
+
+      <UnderTheHood />
     </>
   );
 }

@@ -9,7 +9,7 @@ export default function HistoryPage() {
   return (
     <main className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
       <h1 className="font-serif text-4xl font-semibold tracking-tight">Past digests</h1>
-      <p className="mt-2 max-w-prose text-sm text-muted">Every saved run, newest first. Open one to see it exactly as it was built, including dry runs that weren&apos;t emailed.</p>
+      <p className="mt-2 max-w-prose text-sm text-muted">Every saved run, newest first. Open one to see it exactly as it was built, including dry runs that weren&apos;t emailed. <Link href="/about" className="whitespace-nowrap font-medium text-foreground underline underline-offset-2">How a digest is built →</Link></p>
       <Suspense fallback={<div className="mt-6 h-64 animate-pulse rounded-xl bg-line" aria-busy="true" />}>
         <List />
       </Suspense>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Suspense } from "react";
 import { ActionsPanel } from "@/components/repos/actions-panel";
 import { AddRepoForm } from "@/components/repos/add-repo-form";
@@ -43,7 +44,8 @@ async function Repos() {
       <div>
         <h1 className="font-serif text-4xl font-semibold tracking-tight">Tracked repos</h1>
         <p className="mt-2 max-w-prose text-sm text-muted">
-          <span className="font-mono">{repos?.length ?? 0}</span> of {MAX_REPOS} repos. Edit the list here, no code needed. Changes apply from the next run. There is no login, so anyone with this link can edit.
+          <span className="font-mono">{repos?.length ?? 0}</span> of {MAX_REPOS} repos. Edit the list here, no code needed. Changes apply from the next run. There is no login, so anyone with this link can edit.{" "}
+          <Link href="/about#which-repos" className="whitespace-nowrap font-medium text-foreground underline underline-offset-2">How the list is chosen →</Link>
         </p>
       </div>
 

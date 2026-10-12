@@ -1,4 +1,5 @@
 import "server-only";
+import { connection } from "next/server";
 import { buildDigest } from "@/lib/digest";
 import type { Digest } from "@/lib/digest-types";
 import { rowToRelease, type AnalysisRow } from "@/lib/digest-rows";
@@ -51,6 +52,7 @@ export interface Dashboard {
  * after another was the biggest cost of a page view.
  */
 export async function loadDashboard(days: number): Promise<Dashboard> {
+  await connection(); // "now" below must be read at request time, never frozen at prerender
   const now = new Date();
   const window = windowFor(days, now);
   const [latest, repos, reviewEnabled] = await Promise.all([getLatestDigest(), getActiveRepos(), reviewTrackingEnabled()]);
