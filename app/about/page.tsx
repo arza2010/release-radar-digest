@@ -57,6 +57,25 @@ export default function About() {
         ))}
       </ol>
 
+      <H2>Which repos does it watch?</H2>
+      <div className="mt-5 flex max-w-prose flex-col gap-4 leading-relaxed">
+        <p>
+          <span className="font-semibold">A fixed list, not a search.</span> The app watches exactly the repos on the Repos page and nothing else. It does not discover repos, and it does not filter by industry, topic, stars or language. The starting list of 22 was picked by hand, leaning on payments (Stripe, Razorpay, Adyen), authentication (next-auth, jose, Keycloak, Auth0) and web basics (Express, axios, Fastify), and each one was checked against live GitHub first.
+        </p>
+        <p>
+          <span className="font-semibold">Two kinds of repo.</span> A <span className="font-mono text-sm">dependency</span> is a library or service we ship against, where a security fix or breaking change matters most. An <span className="font-mono text-sm">evaluating</span> repo is a tool we are considering, and it also gets a cadence and momentum line (how often it releases, how fast its stars are growing).
+        </p>
+        <p>
+          <span className="font-semibold">Anyone can add to it.</span> If a colleague recommends something, or whoever looks after the dashboard wants to keep an eye on another project, they paste <span className="font-mono text-sm">owner/name</span> or a GitHub link on the Repos page. No code changes and no redeploy.
+        </p>
+        <p>
+          <span className="font-semibold">What happens when you add one.</span> The app checks that the repo exists on GitHub and is public, that it is not already tracked, and that the list is under its 40-repo limit. If the repo is archived or has never published a GitHub release, you get a warning but it is still added. From then on it is pulled automatically: the next time the dashboard opens (within minutes) its last 7 days of releases appear, and it is part of Monday&apos;s digest. Older releases show up in the 30 and 90-day views after you press Backfill.
+        </p>
+        <p className="text-sm text-muted">
+          Only public repos can be watched, and only what they publish as GitHub releases. If a new repo releases a lot at once, rule flags appear immediately and AI summaries fill in over the next refreshes, because AI calls are capped to protect the free quota.
+        </p>
+      </div>
+
       <H2>Who does what</H2>
       <div className="mt-5 overflow-hidden rounded-xl border border-line bg-surface">
         <table className="w-full text-left text-sm">

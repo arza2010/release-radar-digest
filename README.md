@@ -49,6 +49,12 @@ So the AI caught 3 breaking changes no keyword would find, the rules caught real
 
 The principle: **the AI decides what to raise, never what to bury.**
 
+## Which repos does it watch?
+
+A fixed list you control, not a search. The app watches exactly the repos on the **Repos** page; it never discovers repos and never filters by industry, topic, stars or language. The starting 22 were hand-picked (payments, authentication, web basics) and checked against live GitHub. Each is tagged `dependency` (we ship against it) or `evaluating` (we're considering it; also gets a cadence and star-momentum line).
+
+Anyone can add a repo by pasting `owner/name` or a GitHub link, with no code change. The app checks that it exists and is public, that it isn't already tracked, and that the list is under 40 repos; archived repos or repos with no GitHub releases get a warning but are still added. Once added it is pulled automatically: the next dashboard open (within minutes) shows its last 7 days, it is part of Monday's digest, and older releases appear in the 30/90-day views after **Backfill**.
+
 ## Architecture
 
 ![Components map](public/components-map.png)
