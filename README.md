@@ -49,6 +49,15 @@ So the AI caught 3 breaking changes no keyword would find, the rules caught real
 
 The principle: **the AI decides what to raise, never what to bury.**
 
+## Pages
+
+| Page | What it is |
+|---|---|
+| `/` | The live digest: pulls fresh releases when opened, flags security and breaking changes first, 7 / 30 / 90-day views, filters, raw notes |
+| `/history` | Every past digest (including dry runs), each viewable exactly as it was built |
+| `/repos` | The watch list: add, retag or remove repos, run a digest now, backfill 90 days |
+| `/about` | How it works: the pipeline, which repos are watched and why, who does what (AI / rules / human), known limits |
+
 ## Which repos does it watch?
 
 A fixed list you control, not a search. The app watches exactly the repos on the **Repos** page; it never discovers repos and never filters by industry, topic, stars or language. The starting 22 were hand-picked (payments, authentication, web basics) and checked against live GitHub. Each is tagged `dependency` (we ship against it) or `evaluating` (we're considering it; also gets a cadence and star-momentum line).
