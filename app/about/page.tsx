@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { RadarMark } from "@/components/radar-mark";
 import { SOURCE_URL } from "@/lib/site";
@@ -58,7 +57,6 @@ export default function About() {
           ["pipeline", "Pipeline"],
           ["which-repos", "Which repos"],
           ["who-does-what", "AI / rules / human"],
-          ["components", "Components map"],
           ["known-limits", "Known limits"],
         ].map(([id, label]) => (
           <a key={id} href={`#${id}`} className="rounded-full border border-line bg-surface px-3 py-1 text-muted hover:border-accent hover:text-foreground">
@@ -127,19 +125,6 @@ export default function About() {
       <p className="mt-3 max-w-prose text-sm leading-relaxed text-muted">
         That is why a rule flag survives an AI that says “routine”: the dashboard shows both opinions (“Rule flagged; AI judged routine — check the notes”) and leaves the decision to you.
       </p>
-
-      <H2 id="components">Components map</H2>
-      <figure className="mt-5">
-        <Image
-          src="/components-map.png"
-          alt="Components map: Keerthi edits the repo list; the scheduler starts a weekly run; the system reads repos from Supabase, fetches releases from GitHub, applies rules, sends text to Gemini Flash, merges flags and saves the digest; delivery is an email via Resend and a dashboard."
-          width={2244}
-          height={2387}
-          sizes="(min-width: 768px) 768px, 100vw"
-          className="w-full rounded-xl border border-line bg-white"
-        />
-        <figcaption className="mt-2 text-xs text-muted">One difference from the diagram: releases are sent to Gemini in batches of up to 8 per call, not one call per release, to stay inside the free quota.</figcaption>
-      </figure>
 
       <H2 id="known-limits">Known limits</H2>
       <ul className="mt-5 flex flex-col gap-4">
