@@ -10,7 +10,7 @@ import { parseQuery, parseShow } from "@/lib/digest-filter";
 import { loadDashboard } from "@/lib/digest-store";
 
 // The live refresh runs as a server action from this page (GitHub fetch + a couple of Gemini calls).
-export const maxDuration = 120;
+export const maxDuration = 300;
 
 export default function Home(props: PageProps<"/">) {
   return (

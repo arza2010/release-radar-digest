@@ -110,7 +110,7 @@ Secrets live only in environment variables. `.env*` is gitignored except `.env.e
 | `npm run build-digest` | run the whole pipeline and save a digest, no email |
 | `npm run examples` | print real examples: notes · rules · AI verdict |
 | `npm run preview-email` | write the latest digest as email HTML to `tmp-email/` |
-| `npm test` | Vitest unit tests (88 cases) |
+| `npm test` | Vitest unit tests (94 cases) |
 
 ## Design decisions worth knowing
 

@@ -10,6 +10,7 @@ import type { GithubRelease, RepoMeta } from "@/lib/types";
  */
 const API = "https://api.github.com";
 const PER_PAGE = 30;
+const REQUEST_TIMEOUT_MS = 20_000; // a hung request fails fast and takes the one-retry path below
 
 export type GithubErrorReason = "not found (check the name)" | "rate limited" | "GitHub error";
 
@@ -44,6 +45,7 @@ async function ghGet<T>(path: string): Promise<T> {
           "User-Agent": "release-radar",
         },
         cache: "no-store",
+        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
       });
     } catch (e) {
       lastError = new GithubError("GitHub error", 0, e instanceof Error ? e.message : "network error");

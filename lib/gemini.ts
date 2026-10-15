@@ -10,6 +10,8 @@ import type { ReleaseRecord } from "@/lib/types";
 export const BATCH_SIZE = 8;
 export const BODY_CHAR_LIMIT = 6000;
 const RETRY_DELAY_MS = 5000;
+/** A call that hasn't answered by now is treated as a network failure and retried once, so a stuck connection can't freeze a refresh. */
+export const CALL_TIMEOUT_MS = 45_000;
 
 import type { AiCategory } from "@/lib/digest-types";
 const CATEGORIES: AiCategory[] = ["security", "breaking", "routine"];
@@ -166,6 +168,9 @@ export async function classifyBatch(releases: ReleaseRecord[]): Promise<BatchRep
         model: env("GEMINI_MODEL"),
         contents: content,
         config: {
+          // The SDK retries up to 5 times by default with backoff, silently. We own the retry policy (one retry, below),
+          // so switch the SDK's off; otherwise one stuck batch can take minutes and burn extra quota.
+          httpOptions: { timeout: CALL_TIMEOUT_MS, retryOptions: { attempts: 1 } },
           systemInstruction: classifyPrompt(),
           responseMimeType: "application/json",
           responseSchema: RESPONSE_SCHEMA,
